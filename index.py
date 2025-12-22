@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 from flask import Flask, render_template, request
 from composerstop100 import get_specifics, game_one_turn
 from unidecode import unidecode
 from datetime import datetime
+
+import nltk
+try:
+    from nltk.tokenize import word_tokenize
+
+except LookupError:
+    os.mkdir('nltk_data')
+    nltk.download("punkt")
+    from nltk.tokenize import word_tokenize
 
 app = Flask(__name__, template_folder='templates')
 
