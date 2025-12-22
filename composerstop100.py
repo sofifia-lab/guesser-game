@@ -9,7 +9,8 @@ import random
 
 import nltk
 
-from nltk.tokenize import word_tokenize, sent_tokenize
+nltk.download('punkt')
+from nltk.tokenize import word_tokenize
 
 from unidecode import unidecode
 
