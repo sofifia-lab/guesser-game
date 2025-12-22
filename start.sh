@@ -36,6 +36,8 @@ pip3 install rpds-py==0.30.0
 pip3 install six==1.17.0
 pip3 install smmap==5.0.2
 pip3 install soupsieve==2.8
+pip3 install spacy -U
+python3 -m spacy download en_core_web_sm
 pip3 install streamlit==1.52.2
 pip3 install tenacity==9.1.2
 pip3 install toml==0.10.2

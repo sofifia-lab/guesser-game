@@ -8,14 +8,8 @@ import string
 import random
 
 import os
-import nltk
-
-try:
-    from nltk.tokenize import word_tokenize
-
-except LookupError:
-    nltk.download("punkt")
-    from nltk.tokenize import word_tokenize
+import spacy
+nlp = spacy.load('en_core_web_sm')
 
 from unidecode import unidecode
 
@@ -176,7 +170,7 @@ def get_specifics(i=None):
 			if i.startswith('src='):
 				link = i[7:-1]
 
-	summary_tokenized = word_tokenize(summary)
+	summary_tokenized = [token.text for token in nlp(summary)]
 	summary_token_ascii = set([unidecode(i.lower()) for i in summary_tokenized])
 	summary_token_set= set([i.lower() for i in summary_tokenized])
 	
