@@ -7,9 +7,11 @@ import wikipedia
 import string
 import random
 
+import os
+os.system('python -m nltk.download("punkt")')
 import nltk
 
-nltk.download('punkt')
+
 from nltk.tokenize import word_tokenize
 
 from unidecode import unidecode
