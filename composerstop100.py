@@ -8,7 +8,6 @@ import string
 import random
 
 import os
-os.system('python -m nltk.download("punkt")')
 import nltk
 
 
