@@ -8,7 +8,7 @@ import string
 import random
 
 import nltk
-from nltk.corpus import stopwords
+
 from nltk.tokenize import word_tokenize, sent_tokenize
 
 from unidecode import unidecode
@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 
 
 
-stop_words = set(stopwords.words('english'))
+stop_words = [i.strip() for i in open('stopwords.txt', 'r', encoding='utf-8').readlines()]
 punctuation = [i for i in string.punctuation]
 
 
