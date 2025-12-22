@@ -10,8 +10,12 @@ import random
 import os
 import nltk
 
+try:
+    from nltk.tokenize import word_tokenize
 
-from nltk.tokenize import word_tokenize
+except LookupError:
+    nltk.download("punkt_tab")
+    from nltk.tokenize import word_tokenize
 
 from unidecode import unidecode
 

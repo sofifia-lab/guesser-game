@@ -20,7 +20,6 @@ pip3 install jsonschema-specifications==2025.9.1
 pip3 install MarkupSafe==3.0.3
 pip3 install narwhals==2.14.0
 pip3 install nltk==3.8.1
-python3 -c "import nltk;nltk.download('punkt')" -d "/opt/render/nltk_data"
 pip3 install numpy==2.3.5
 pip3 install packaging==25.0
 pip3 install pandas==2.3.3
