@@ -18,14 +18,14 @@
 
 </head>
 
-<body style="background-color: rgb(3, 84, 22)">
+<body style="background-color: rgb(3, 84, 22)" onload="reset()">
 
     <div class="container p-5 my-2 text-white rounded" style="color: rgb(3, 84, 22)">
 
     </div>
 
     <div class="container"> 
-        <h1 style="color: lightblue">Who is this Diva?</h1>
+        <a href='/index' style="text-decoration:none"><h1 style="color: lightblue; text-align: left;">Who is this Diva?</h1></a>
 
         <div class="row">
         <div class="col-lg-8 p-2 my-5 text-white rounded" style="color: rgb(3, 84, 22)">
@@ -45,7 +45,7 @@
 
         <form action="/game" method="post" class="guess">
             <div class="row">
-                <input type='text' id="guess" name="guess" placeholder="" style="">
+                <input type='text' id="guess" name="guess" placeholder="" autocomplete='off'>
                 <p><br></p>
                 <button type="submit" id="submit" class="btn btn-outline-light">enter<i class="bi bi-house-door"></i></button>
             </div>

@@ -7,17 +7,8 @@ from composerstop100 import get_specifics, game_one_turn
 from unidecode import unidecode
 from datetime import datetime
 
-import nltk
-try:
-    from nltk.tokenize import word_tokenize
-
-except LookupError:
-    os.mkdir('nltk_data')
-    nltk.download("punkt")
-    from nltk.tokenize import word_tokenize
 
 app = Flask(__name__, template_folder='templates')
-
 
 date = datetime.now()
 idx = (datetime(date.year, date.month, date.day).timetuple().tm_yday)%100
@@ -29,6 +20,28 @@ title_progress = [i for i in title.split()]
 title_blank = ['_'*len(i) for i in title.split()]
 
 
+
+def reload():
+    global date
+    date = datetime.now()
+    global idx
+    idx = (datetime(date.year, date.month, date.day).timetuple().tm_yday)%100
+    global first_name, last_name, summary, gap_text, summary_token_set, summary_token_ascii, link, title
+    first_name, last_name, summary, gap_text, summary_token_set, summary_token_ascii, link, title = get_specifics(idx)
+    global finished_bool
+    finished_bool = False
+    global words_used
+    words_used = list()
+    global tries
+    tries = list()
+    global title_progress
+    title_progress = [i for i in title.split()]
+    global title_blank
+    title_blank = ['_'*len(i) for i in title.split()]
+
+    #return date, idx, first_name, last_name, summary, gap_text, summary_token_set, summary_token_ascii, link, title, finished_bool, words_used, tries, title_blank, title_progress
+
+
 @app.route('/', methods=('GET',))
 @app.route('/index')
 def index():
@@ -36,12 +49,12 @@ def index():
         return render_template("index.html")
 
     elif request.method == "POST":
-        return None
+        game_text = ' '.join([i[0] for i in gap_text])
+        return render_template('game.html', title=" ".join(title_blank), game_text=game_text, words_used=words_used)
 
 
 @app.route('/game', methods=['GET',"POST"])
 def game(title_blank=title_blank, title=title, gap_text=gap_text, words_used=words_used, summary=summary, link=link):
-
 
     if request.method == 'GET':
 
@@ -60,12 +73,11 @@ def game(title_blank=title_blank, title=title, gap_text=gap_text, words_used=wor
             return render_template('correct.html', title=title, summary=summary, words_used=words_used, tries=len(set(tries)), link=link)
 
         if guess in [t.lower() for t in title_progress] or guess in [unidecode(t.lower()) for t in title_progress] :
-            title_blank = list()
-            for i in title_progress:
+            for n, i in enumerate(title_progress):
                 if i.lower() == guess or (unidecode(i.lower())) == guess:
-                    title_blank.append(i)
+                    title_blank[n] =  i
                 else:
-                    title_blank.append('_'*len(i))
+                    title_blank[n] =  '_'*len(i)
 
     return render_template('game.html', title=" ".join(title_blank), game_text=game_text, words_used=words_used)
 
